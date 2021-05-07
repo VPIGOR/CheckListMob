@@ -36,6 +36,7 @@ public abstract class TastBase {
         mainPage = new MainPageHelper(driver);
         listPage = new CurrentListPageHelper(driver);
 
+//        ------------------ pochemuto ne rabotaet----------------------------------
 //        mainPage = PageFactory.initElements(driver,MainPageHelper.class);
 //        listPage = PageFactory.initElements(driver, CurrentListPageHelper.class);
 
