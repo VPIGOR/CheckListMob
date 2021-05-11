@@ -1,6 +1,6 @@
 package Pages;
 
-import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -10,8 +10,12 @@ public class CurrentListPageHelper extends PageBase{
     WebElement exitFromListButton;
     @FindBy(className = "android.widget.TextView")
     WebElement listName;
+    @FindBy(id = "com.flt.checklist:id/add_item")
+    WebElement addItemButton;
+    @FindBy(id = "com.flt.checklist:id/add_item_edit")
+    WebElement itemNameField;
 
-    public CurrentListPageHelper(AppiumDriver driver) {
+    public CurrentListPageHelper(WebDriver driver) {
         super(driver);
     }
 
@@ -20,7 +24,17 @@ public class CurrentListPageHelper extends PageBase{
         return this;
     }
 
+    public CurrentListPageHelper createNewItem(String itemName){
+        fillField(itemNameField,itemName);
+        addItemButton.click();
+        return this;
+    }
+
     public String getListName() {
         return listName.getText();
+    }
+    public CurrentListPageHelper waitPlusVisable(){
+        waitUntilElementIsClickabl(addItemButton,2);
+        return this;
     }
 }

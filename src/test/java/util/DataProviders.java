@@ -17,7 +17,7 @@ public class DataProviders {
                 DataProviders.class
                         .getResourceAsStream("/names.data")));
 
-        List<Object> userData = new ArrayList<Object>();
+        List<Object> userData = new ArrayList<>();
         String line = in.readLine();
         while (line != null) {
             userData.add(line);

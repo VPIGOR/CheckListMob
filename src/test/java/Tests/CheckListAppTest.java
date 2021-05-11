@@ -19,21 +19,37 @@ public class CheckListAppTest extends TastBase {
 
     @Test(dataProviderClass = DataProviders.class, dataProvider = "names")
     public void createAmptyListTest(String listName) {
-
         mainPage
                 .clickAddList()
                 .enterListName(listName)
                 .pressOkCreationList();
-
+        listPage
+                .waitPlusVisable();
         String currentListName = listPage.getListName();
-
         listPage
                 .returnToMainPage();
-
         String lastListName = mainPage.lastListName();
-
-
         Assert.assertEquals(currentListName, lastListName, "somthing went wrong");
+
+    }
+
+    @Test
+    public void createNotAmptyListTest(){
+        int listCountBefore = mainPage.getListCount();
+        mainPage
+                .clickAddList()
+                .enterListName("listName")
+                .pressOkCreationList();
+        listPage
+                .waitPlusVisable()
+                .createNewItem("ne item")
+                .returnToMainPage();
+        int listCountAfter =
+        mainPage
+                .waitPageLoad()
+                .getListCount();
+
+        Assert.assertEquals(listCountAfter-listCountBefore,1,"List didnt add");
 
     }
 

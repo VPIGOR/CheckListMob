@@ -1,12 +1,18 @@
 package Pages;
 
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class MainPageHelper extends PageBase {
 
-    @FindBy(className = "android.widget.TextView")
+    public MainPageHelper(WebDriver driver) {super(driver); }
+
+    @AndroidFindBy(className = "android.widget.TextView")
     WebElement title;
     @FindBy(id = "com.flt.checklist:id/add_shopping_list")
     WebElement addListButton;
@@ -16,12 +22,15 @@ public class MainPageHelper extends PageBase {
     WebElement createListButton;
     @FindBy(id = "com.flt.checklist:id/list_title")
     WebElement lastList;
+    @FindBy(id = "com.flt.checklist:id/list_title")
+    List<WebElement> listsName;
 
 
-    public MainPageHelper(AppiumDriver driver) {
-        super(driver);
+
+
+    public int getListCount(){
+      return  listsName.size();
     }
-
 
     public String mainPageTitle() {
         return title.getText();
@@ -48,5 +57,9 @@ public class MainPageHelper extends PageBase {
 
     public String lastListName() {
         return lastList.getText();
+    }
+    public MainPageHelper waitPageLoad(){
+        waitUntilElementIsClickabl(addListButton,2);
+        return this;
     }
 }
