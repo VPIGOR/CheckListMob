@@ -1,7 +1,6 @@
 package Pages;
 
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +9,9 @@ import java.util.List;
 
 public class MainPageHelper extends PageBase {
 
-    public MainPageHelper(WebDriver driver) {super(driver); }
+    public MainPageHelper(WebDriver driver) {
+        super(driver);
+    }
 
     @AndroidFindBy(className = "android.widget.TextView")
     WebElement title;
@@ -28,8 +29,8 @@ public class MainPageHelper extends PageBase {
 
 //
 
-    public int getListCount(){
-      return  listsName.size();
+    public int getListCount() {
+        return listsName.size();
     }
 
     public String mainPageTitle() {
@@ -58,8 +59,22 @@ public class MainPageHelper extends PageBase {
     public String lastListName() {
         return lastList.getText();
     }
-    public MainPageHelper waitPageLoad(){
-        waitUntilElementIsClickabl(addListButton,2);
+
+    public MainPageHelper waitPageLoad() {
+        waitUntilElementIsClickabl(addListButton, 2);
         return this;
     }
+
+    public boolean isCheclistTitle(String listName) {
+        int size = getListCount();
+        boolean res = false;
+        if (size != 0 && listsName.get(listsName.size() - 1).getText().equals(listName)) {
+            res = true;
+        }
+        return res;
+    }
+
 }
+
+
+

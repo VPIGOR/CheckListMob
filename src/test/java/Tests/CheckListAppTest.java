@@ -19,6 +19,7 @@ public class CheckListAppTest extends TastBase {
 
     @Test(dataProviderClass = DataProviders.class, dataProvider = "names")
     public void createAmptyListTest(String listName) {
+        int listCount = mainPage.getListCount();
         mainPage
                 .clickAddList()
                 .enterListName(listName)
@@ -29,9 +30,36 @@ public class CheckListAppTest extends TastBase {
         listPage
                 .returnToMainPage();
         String lastListName = mainPage.lastListName();
+
+        Assert.assertEquals(listCount+1,mainPage.getListCount(),"no list");
         Assert.assertEquals(currentListName, lastListName, "somthing went wrong");
+        Assert.assertTrue(mainPage.isCheclistTitle(listName));
 
     }
+
+    @Test
+    public void createAmptyListWithRotationTest() {
+        int listCount = mainPage.getListCount();
+        mainPage
+                .clickAddList()
+                .enterListName("TestForRotation")
+                .pressOkCreationList();
+        listPage
+                .waitPlusVisable();
+        String currentListName = listPage.getListName();
+        listPage
+                .returnToMainPage()
+                .rotationScreenLandScape();
+
+        String lastListName = mainPage.lastListName();
+
+        Assert.assertEquals(listCount+1,mainPage.getListCount(),"no list");
+        Assert.assertEquals(currentListName, lastListName, "somthing went wrong");
+
+
+    }
+
+
 
     @Test
     public void createNotAmptyListTest(){
