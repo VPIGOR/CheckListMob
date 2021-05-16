@@ -1,6 +1,7 @@
 package Pages;
 
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,9 +26,6 @@ public class MainPageHelper extends PageBase {
     WebElement lastList;
     @FindBy(id = "com.flt.checklist:id/list_title")
     List<WebElement> listsName;
-
-
-//
 
     public int getListCount() {
         return listsName.size();
@@ -74,6 +72,10 @@ public class MainPageHelper extends PageBase {
         return res;
     }
 
+    public void swipeToLastElement() {
+
+        swipeUpToElement(By.xpath("//*[@text = 'list # 22']"),3);
+    }
 }
 
 

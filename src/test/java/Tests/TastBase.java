@@ -44,12 +44,13 @@ public abstract class TastBase {
 
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        listPage.rotationScreenPortrate();
 
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        driver.resetApp();
+        driver.quit();
     }
 
 
