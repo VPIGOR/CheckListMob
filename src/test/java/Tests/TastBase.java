@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
-
+/
 public abstract class TastBase {
     AppiumDriver driver;
     MainPageHelper mainPage;
